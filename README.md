@@ -74,7 +74,19 @@ flowchart TD
 
 Each fact row represents one airport, month, city, flight type, and direction. A unique constraint prevents duplicate records at this level.
 
+## dbt: monthly summary and lineage
+
 The dbt view, `analytics.monthly_airport_traffic`, joins the fact and date tables and aggregates counts by month. Three tests check that the month is present and unique and the flight total is present.
+
+The two existing warehouse tables are declared as **sources** in `dbt/models/schema.yml`. The model uses `source()` to reference them, allowing dbt to track where its data comes from. The arrows below show these dependencies (lineage).
+
+```mermaid
+flowchart LR
+    F["Source: public.fact_airport_traffic"] --> M["View: analytics.monthly_airport_traffic"]
+    D["Source: public.dim_date"] --> M
+```
+
+Python loads the source tables; dbt builds the summary view.
 
 ## Files
 
@@ -88,7 +100,7 @@ sql/schema.sql                         Tables and constraints
 sql/queries.sql                        Four business questions
 dbt/dbt_project.yml                    Model configuration
 dbt/profiles.yml                       Connection settings
-dbt/models/                            Monthly view and data tests
+dbt/models/                            Source definitions, monthly view, and tests
 docs/data_sources.md                   Attribution and cleaning notes
 ```
 

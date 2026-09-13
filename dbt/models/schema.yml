@@ -1,5 +1,15 @@
 version: 2
 
+sources:
+  - name: airport_warehouse
+    schema: public
+    description: Cleaned warehouse tables loaded by Python.
+    tables:
+      - name: fact_airport_traffic
+        description: Passenger and flight counts by month, city, type, and direction.
+      - name: dim_date
+        description: Reporting months and their calendar attributes.
+
 models:
   - name: monthly_airport_traffic
     description: One row per reporting month with total Dammam Airport traffic.
