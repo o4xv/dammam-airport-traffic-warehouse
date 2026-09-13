@@ -1,0 +1,12 @@
+name: "dammam_airport_traffic"
+version: "1.0.0"
+config-version: 2
+
+profile: "dammam_airport_traffic"
+
+model-paths: ["models"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  dammam_airport_traffic:
+    +materialized: view

@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: monthly_airport_traffic
+    description: One row per reporting month with total Dammam Airport traffic.
+    columns:
+      - name: reporting_month
+        description: The first day of the reporting month.
+        tests:
+          - not_null
+          - unique
+      - name: total_flights
+        description: Total flights for the reporting month.
+        tests:
+          - not_null
